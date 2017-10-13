@@ -20,7 +20,6 @@ def main(args):
     
     dzial = dane_z_pliku('dział.txt')
     
-    
     pracownicy = dane_z_pliku('pracownicy.txt')
     pracownicy = wyczysc_dane(pracownicy, 5)
     
