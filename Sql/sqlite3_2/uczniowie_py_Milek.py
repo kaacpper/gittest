@@ -54,9 +54,6 @@ def kw_e(cur):
     WHERE PrzedmiotID = 6
     AND strftime('%m', datad) LIKE '10'    
     """)
-#   AND datad >= '2012-10-01'
-#   AND datad <= '2012-10-31'- inny sposób na podpunkt e) https://sqlite.org/langdatefunc.html
-
     
     wyniki(cur)
         
@@ -68,7 +65,7 @@ def kw_f(cur):
     AND nazwisko = ?
     """, [35, "Paulina", "Dziedzic"])
     cur.execute("""
-    SELECT Egzjez
+    SELECT EgzJez
     FROM tbUczniowie
     WHERE imie = "Paulina"
     AND nazwisko = "Dziedzic"
