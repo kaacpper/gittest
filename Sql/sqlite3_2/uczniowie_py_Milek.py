@@ -103,7 +103,7 @@ def main(args):
     cur = con.cursor() #utworzenie kursora
     con.row_factory = sqlite3.Row
    
-   kw_f(cur) 
+    kw_f(cur) 
    # dodaj(cur)
    # aktualizuj(cur)
    # usun(cur)
