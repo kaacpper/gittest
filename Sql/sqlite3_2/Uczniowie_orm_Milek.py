@@ -11,33 +11,43 @@ class BazaModel(Model):  # klasa bazowa
         database = baza
 
 class Klasa(BazaModel):
-    id = IntegerField(primary_key=True)
-    klasa = CharField(null=False)
-    rok_naboru = CharField(null=False)
-    rok_matury = CharField(null=False)
-
-
-class Oceny(BazaModel):
-    id = CharField(primary_key=True)
-    datad = DATETIME
-    UczenId = ForeignKey(uczen)
-    PrzedmiotId = IntegerField(null=False)
-    Ocena = DecimalField(decimal_places=2)
+    nazwa = CharField(null=False)
+    rok_naboru = IntegerField(null=False)
+    rok_matury = IntegerField(null=False)
 
 class Przedmiot(BazaModel):
-    id = IntegerField(primary_key=True)
-    przedmiot = CharField(null=False)
-    NazwiskoNaucz = CharField(null=False)
-    ImieNaucz = CharField(null=False)
-    PlecNaucz = IntegerField(null=False)
+    nazwa = CharField(null=False)
+    nazwiskon = CharField(null=False)
+    imien = CharField(null=False)
+    plecn = IntegerField(null=False)
 
-
-class Uczniowie(BazaModel):
-    id = IntegerField(primary_key=True)
+class Uczen(BazaModel):
     nazwisko = CharField(null=False)
     imie = CharField(null=False)
     plec= IntegerField(null=False)
-    KlasaId = IntegerField(null=False)
-    EgzHum = DecimalField(decimal_places=2, default=0, null=False)
-    EgzMat = DecimalField(decimal_places=2, default=0, null=False)
-    EgzJez = DecimalField(decimal_places=2, default=0, null=False)
+    KlasaId = ForeignKeyField(Klasa, related_name= 'Uczen')
+    egzhum = IntegerField(null=False)
+    egzmat = IntegerField(null=False)
+    egzjez = IntegerField(null=False)
+
+class Ocena(BazaModel):
+    datad = DateField (null=False)
+    UczenId = ForeignKeyField(Klasa, related_name= 'Ocena')
+    PrzedmiotId = ForeignKeyField(Klasa, related_name= 'Ocena')
+    Ocena = DecimalField(decimal_places=2)
+
+
+baza.connect()  # nawiązujemy połączenie z bazą
+
+def kwerenda_3a():
+    query = (Uczen
+            .select(Uczen.imie, Uczen.nazwisko)
+            .join(Klasa)
+            .group_by('1a')
+            )
+
+
+    for obj in query:
+        print(obj.imie, obj.nazwisko)
+
+kwerenda_3a()
