@@ -24,6 +24,11 @@ def fromularz():
         dane = [imie, nazwisko, wiek]
     return render_template('formularz.html', dane = dane)
 
+@app.route('/formularz', methods=['GET', 'POST'])
+def todo():
+    form = TodoForm()
+    return render_template('todo.html', form=form)
+
 
 @app.route('/lista')
 def lista():
