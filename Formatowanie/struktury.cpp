@@ -5,6 +5,8 @@
 
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+
 
 using namespace std;
 
@@ -55,6 +57,40 @@ void drukujSamochody(samochod t[], int n){
         cout << setw(25) << left <<  "Przebieg: " << setfill('.') << t[i].przebieg << endl << endl;
     }
 }
+
+
+void zapiszDane (samochod t[], int n) {
+    ofstream plik("samochody.txt", ios::app);
+    if (!plik.is_open()) {
+        cout << "Błąd otwarcia pliku!";
+    } else {
+        for(int i=0; i < n; i++) {
+            cout << t[i].marka << "," << t[i].model << "," << t[i].rok << "," << t[i].przebieg << endl;
+            plik << t[i].marka << "," << t[i].model << "," << t[i].rok << "," << t[i].przebieg << endl;
+        }
+    }
+}
+
+
+int czytajDane(samochod t[]) {
+    ifstream plik("samochody.txt");
+    string linia;
+    int i = 0;
+    
+    if (plik.is_open()) {        
+        while(getline(plik, linia)) {
+            cout << linia << endl;
+            i++; //liczymy przeczytane rekordy
+        }
+    } else {
+        cout << "Błąd otwarcia pliku";
+    }
+    
+    return i;
+}
+
+
+
 int main(int argc, char **argv)
 {
 
@@ -78,9 +114,10 @@ int main(int argc, char **argv)
     
     int n = 3;
     samochod tb[n];
-    getSamochody(tb, n);
+    //getSamochody(tb, n);
+    //drukujSamochody(tb, n);
     
-    drukujSamochody(tb, n);
-    
-	return 0;
+    //zapiszDane(tb, n);
+	cout << czytajDane(tb) << endl;
+    return 0;
 }
