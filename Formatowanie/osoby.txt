@@ -1,3 +1,2 @@
-a,s,23
-s,d,23
-a,w,45
+Adam,Słodowy,32
+Norbert,Pyton,23

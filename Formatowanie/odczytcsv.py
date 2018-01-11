@@ -2,11 +2,17 @@
 # -*- coding: utf-8 -*-
 #
 #  odczytcsv.py
-# ma odczytać poszczególne linie i wydrukowac na ekranie
+#  
+
+import csv
 
 def main(args):
+    plik = open("samochody.txt")
+    tekst = plik.read()
+    plik.close()
+    print(tekst)
     return 0
 
 if __name__ == '__main__':
     import sys
-    sys.exit(main(sys.argv))
+sys.exit(main(sys.argv))
