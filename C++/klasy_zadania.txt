@@ -1,0 +1,9 @@
+Klasa samochod
+marka
+model
+poj silnika
+poj baku
+set_spalanie()
+get_spalanie()
+zatankuj(20)
+jedz(100)
