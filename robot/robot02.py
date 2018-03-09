@@ -3,6 +3,7 @@
 
 import rg
 
+
 class Robot:
 
     def act(self, game):
@@ -22,6 +23,13 @@ class Robot:
         # pola sąsiednie zajęte przez wrogów
         wrogowie_obok = sasiednie & wrogowie
 
+
+        for wrog in wrogowie:
+            if rg.wdist(poz, self.location) == 2:
+                # ruch = działanie xD
+
+
+
         # działanie domyślne:
         ruch = ['move', rg.toward(self.location, rg.CENTER_POINT)]
 
@@ -34,7 +42,9 @@ class Robot:
             ruch = ['guard']
 
         # jeżeli obok są przeciwnicy, atakuj
-        if wrogowie_obok:
+        if len(wrogowie_obok) > 2 and self.hp < 27:
+            ruch = ['suicide']
+        else wrogowie_obok:
             ruch = ['attack', wrogowie_obok.pop()]
 
         return ruch
